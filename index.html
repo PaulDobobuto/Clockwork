@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0aZZyEh1qWxVY3O2JP0QFueXVTJiLHpN9cA&s">
+    <title>Cronómetro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-image: url(https://images8.alphacoders.com/428/428595.jpg);
+        }
+        #cronometro {
+            font-size: 48px;
+            margin: 20px;
+            padding: 20px; /* Espaciado interno */
+            border: 2px solid #333; /* Borde del cuadro */
+            border-radius: 31px; /* Bordes redondeados */
+            display: inline-block; /* Para ajustar el tamaño del cuadro al contenido */
+            background-image: url(https://w0.peakpx.com/wallpaper/322/50/HD-wallpaper-time-clock-abstract-time-other.jpg);
+            color: beige;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: wheat;
+            border: 2px solid #333 ;
+            border-radius: 31px;
+        }
+        h1 {
+            color: antiquewhite;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            color: beige;
+           /* background-color: #f1f1f1 */ } 
+           a {
+            text-decoration: none; 
+            color: inherit; 
+        }
+        a:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cronómetro Online</h1>
+    <div id="cronometro">00:00:00:00:00</div> <!-- Cambiado a un div --> <br>
+    <button onclick="iniciar()">Iniciar</button>
+    <button onclick="pausar()">Pausar</button>
+    <button onclick="reiniciar()">Reiniciar</button>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <footer style= "text-align: center; margin-top: 20px; padding: 10px;  ">
+        <p> &copy; 2024 <a href="www.linkedin.com/in/paul-dobobuto-7982a0285">Paul Dobobuto.</a>Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        let tiempo = 0; // Tiempo en milisegundos
+        let intervalo;
+        let corriendo = false;
+
+        function actualizarCronometro() {
+            const dias = Math.floor(tiempo / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((tiempo % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((tiempo % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((tiempo % (1000 * 60)) / 1000);
+            const decimas = Math.floor((tiempo % 1000) / 100);
+            const centesimas = Math.floor((tiempo % 100) / 10);
+
+            document.getElementById('cronometro').innerText = 
+                String(dias).padStart(2, '0') + ':' + 
+                String(horas).padStart(2, '0') + ':' + 
+                String(minutos).padStart(2, '0') + ':' + 
+                String(segundos).padStart(2, '0') + ':' + 
+                String(decimas).padStart(1, '0') + ':' + 
+                String(centesimas).padStart(1, '0');
+        }
+
+        function iniciar() {
+            if (!corriendo) {
+                corriendo = true;
+                intervalo = setInterval(() => {
+                    tiempo += 10; // Incrementar en 10 milisegundos
+                    actualizarCronometro();
+                }, 10);
+            }
+        }
+
+        function pausar() {
+            clearInterval(intervalo);
+            corriendo = false;
+        }
+
+        function reiniciar() {
+            clearInterval(intervalo);
+            tiempo = 0;
+            corriendo = false;
+            actualizarCronometro();
+        }
+    </script>
+</body>
+</html>
